@@ -1,5 +1,5 @@
 #Source: nvidia-graphics-drivers${nvidia:Legacy}
-Source: nvidia-graphics-drivers
+Source: nvidia-graphics-drivers-legacy-390xx
 Section: non-free/libs
 Priority: optional
 Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
@@ -28,7 +28,7 @@ Homepage: https://www.nvidia.com
 XS-Autobuild: yes
 
 #Package: ${nvidia}-driver
-Package: nvidia-driver
+Package: nvidia-legacy-390xx-driver
 Section: non-free/x11
 Architecture: i386 amd64 armhf
 Pre-Depends:
@@ -69,7 +69,7 @@ Description: NVIDIA metapackage${nvidia:LegacyDesc}
  Building the kernel module has been tested up to Linux ${nvidia:kmod:tested:Linux}.
 
 #Package: ${nvidia}-driver-bin
-Package: nvidia-driver-bin
+Package: nvidia-legacy-390xx-driver-bin
 Section: non-free/x11
 Architecture: i386 amd64 armhf
 Depends:
@@ -95,7 +95,7 @@ Description: NVIDIA driver support binaries${nvidia:LegacyDesc}
  This package contains supporting binaries for the driver.
 
 #Package: ${nvidia}-driver-libs
-Package: nvidia-driver-libs
+Package: nvidia-legacy-390xx-driver-libs
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Depends:
@@ -130,7 +130,7 @@ Description: NVIDIA metapackage (OpenGL/GLX/EGL/GLES libraries)${nvidia:LegacyDe
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server.
 
 #Package: ${nvidia}-driver-libs-i386
-Package: nvidia-driver-libs-i386
+Package: nvidia-legacy-390xx-driver-libs-i386
 Architecture: i386
 Multi-Arch: foreign
 Depends:
@@ -144,7 +144,7 @@ Description: NVIDIA metapackage (OpenGL/GLX/EGL/GLES 32-bit libraries)${nvidia:L
  on amd64 with foreign architecture i386 enabled.
 
 #Package: ${nvidia}-driver-libs-nonglvnd
-Package: nvidia-driver-libs-nonglvnd
+Package: nvidia-legacy-390xx-driver-libs-nonglvnd
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Depends:
@@ -177,7 +177,7 @@ Description: NVIDIA metapackage (non-GLVND OpenGL/GLX/EGL/GLES libraries)${nvidi
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server.
 
 #Package: ${nvidia}-driver-libs-nonglvnd-i386
-Package: nvidia-driver-libs-nonglvnd-i386
+Package: nvidia-legacy-390xx-driver-libs-nonglvnd-i386
 Architecture: i386
 Multi-Arch: foreign
 Depends:
@@ -191,7 +191,7 @@ Description: NVIDIA metapackage (non-GLVND OpenGL/GLX/EGL/GLES 32-bit libraries)
  on amd64 with foreign architecture i386 enabled.
 
 #Package: xserver-xorg-video-${nvidia}
-Package: xserver-xorg-video-nvidia
+Package: xserver-xorg-video-nvidia-legacy-390xx
 Section: non-free/x11
 Architecture: i386 amd64 armhf
 Pre-Depends:
@@ -308,7 +308,7 @@ Description: Vendor neutral GL dispatch library -- libGLX
  NVIDIA which dispatches to vendor implementations (libGLX_*.so.0) via GLVND.
 
 #Package: libglx-${nvidia}0
-Package: libglx-nvidia0
+Package: libglx-nvidia-legacy-390xx0
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -353,7 +353,7 @@ Description: Vendor neutral GL dispatch library -- libGL
  NVIDIA which dispatches to vendor implementations via GLVND.
 
 #Package: libgl1-${nvidia}-glvnd-glx
-Package: libgl1-nvidia-glvnd-glx
+Package: libgl1-nvidia-legacy-390xx-glvnd-glx
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Depends:
@@ -375,7 +375,7 @@ Description: NVIDIA binary OpenGL/GLX library (GLVND variant)${nvidia:LegacyDesc
  GLVND and the corresponding GLVND loader library.
 
 #Package: libgl1-${nvidia}-glx
-Package: libgl1-nvidia-glx
+Package: libgl1-nvidia-legacy-390xx-glx
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -409,7 +409,7 @@ Description: NVIDIA binary OpenGL/GLX library (non-GLVND variant)${nvidia:Legacy
  provided by NVIDIA as a non-GLVND alternative.
 
 #Package: lib${nvidia}-glcore
-Package: libnvidia-glcore
+Package: libnvidia-legacy-390xx-glcore
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -455,7 +455,7 @@ Description: Vendor neutral GL dispatch library -- libEGL
  NVIDIA which dispatches to vendor implementations (libEGL_*.so.0) via GLVND.
 
 #Package: libegl1-${nvidia}
-Package: libegl1-nvidia
+Package: libegl1-nvidia-legacy-390xx
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -472,7 +472,7 @@ Description: NVIDIA binary EGL library (non-GLVND variant)${nvidia:LegacyDesc}
  as a non-GLVND alternative.
 
 #Package: libegl-${nvidia}0
-Package: libegl-nvidia0
+Package: libegl-nvidia-legacy-390xx0
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -524,7 +524,7 @@ Description: NVIDIA binary OpenGL|ES 1.x GLVND stub library
  (libGLESv1_CM_*.so.1) via GLVND.
 
 #Package: libgles1-${nvidia}
-Package: libgles1-nvidia
+Package: libgles1-nvidia-legacy-390xx
 Section: non-free/oldlibs
 Architecture: i386 amd64 armhf
 Multi-Arch: same
@@ -545,7 +545,7 @@ Description: NVIDIA binary OpenGL|ES 1.x library (transitional)${nvidia:LegacyDe
  implementation.
 
 #Package: libgles-${nvidia}1
-Package: libgles-nvidia1
+Package: libgles-nvidia-legacy-390xx1
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -603,7 +603,7 @@ Description: NVIDIA binary OpenGL|ES 2.x GLVND stub library
  (libGLESv2_*.so.2) via GLVND.
 
 #Package: libgles2-${nvidia}
-Package: libgles2-nvidia
+Package: libgles2-nvidia-legacy-390xx
 Section: non-free/oldlibs
 Architecture: i386 amd64 armhf
 Multi-Arch: same
@@ -625,7 +625,7 @@ Description: NVIDIA binary OpenGL|ES 2.x library (transitional)${nvidia:LegacyDe
  implementation.
 
 #Package: libgles-${nvidia}2
-Package: libgles-nvidia2
+Package: libgles-nvidia-legacy-390xx2
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -652,7 +652,7 @@ Description: NVIDIA binary OpenGL|ES 2.x library${nvidia:LegacyDesc}
  by NVIDIA that is accessed via GLVND.
 
 #Package: lib${nvidia}-eglcore
-Package: libnvidia-eglcore
+Package: libnvidia-legacy-390xx-eglcore
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -690,7 +690,7 @@ Description: NVIDIA binary EGL driver - common files
  driver (ICD) for EGL via GLVND.
 
 #Package: ${nvidia}-egl-icd
-Package: nvidia-egl-icd
+Package: nvidia-legacy-390xx-egl-icd
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Depends:
@@ -778,7 +778,7 @@ Description: NVIDIA Vulkan driver - common files
  driver (ICD) for Vulkan (GLVND variant).
 
 #Package: ${nvidia}-vulkan-icd
-Package: nvidia-vulkan-icd
+Package: nvidia-legacy-390xx-vulkan-icd
 Architecture: i386 amd64
 Multi-Arch: same
 Depends:
@@ -817,7 +817,7 @@ Description: NVIDIA Vulkan driver - common files (non-GLVND variant)
  driver (ICD) for Vulkan (non-GLVND variant).
 
 #Package: ${nvidia}-nonglvnd-vulkan-icd
-Package: nvidia-nonglvnd-vulkan-icd
+Package: nvidia-legacy-390xx-nonglvnd-vulkan-icd
 Architecture: i386 amd64
 Multi-Arch: same
 Depends:
@@ -840,7 +840,7 @@ Description: NVIDIA Vulkan installable client driver (ICD) (non-GLVND variant)${
  Vulkan (non-GLVND variant) which supports NVIDIA GPUs.
 
 #Package: lib${nvidia}-cfg1
-Package: libnvidia-cfg1
+Package: libnvidia-legacy-390xx-cfg1
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -862,7 +862,7 @@ Description: NVIDIA binary OpenGL/GLX configuration library${nvidia:LegacyDesc}
  This package contains the libnvidia-cfg.so.1 runtime library.
 
 #Package: ${nvidia}-alternative
-Package: nvidia-alternative
+Package: nvidia-legacy-390xx-alternative
 Architecture: i386 amd64 armhf ppc64el
 Multi-Arch: foreign
 Pre-Depends:
@@ -897,7 +897,7 @@ Description: allows the selection of NVIDIA as GLX provider${nvidia:LegacyDesc}
  ${nvidia}-driver package instead.
 
 #Package: ${nvidia}-kernel-support
-Package: nvidia-kernel-support
+Package: nvidia-legacy-390xx-kernel-support
 Section: non-free/kernel
 Architecture: i386 amd64 armhf ppc64el
 Multi-Arch: foreign
@@ -922,7 +922,7 @@ Description: NVIDIA binary kernel module support files${nvidia:LegacyDesc}
  This package provides supporting configuration for the kernel module.
 
 #Package: ${nvidia}-kernel-dkms
-Package: nvidia-kernel-dkms
+Package: nvidia-legacy-390xx-kernel-dkms
 Section: non-free/kernel
 Architecture: i386 amd64 armhf ppc64el
 Multi-Arch: foreign
@@ -957,7 +957,7 @@ Description: NVIDIA binary kernel module DKMS source${nvidia:LegacyDesc}
  Building the kernel modules has been tested up to Linux ${nvidia:kmod:tested:Linux}.
 
 #Package: ${nvidia}-kernel-source
-Package: nvidia-kernel-source
+Package: nvidia-legacy-390xx-kernel-source
 Section: non-free/kernel
 Architecture: i386 amd64 armhf ppc64el
 Depends:
@@ -996,7 +996,7 @@ Description: NVIDIA binary kernel module source${nvidia:LegacyDesc}
  Building the kernel modules has been tested up to Linux ${nvidia:kmod:tested:Linux}.
 
 #Package: ${nvidia}-vdpau-driver
-Package: nvidia-vdpau-driver
+Package: nvidia-legacy-390xx-vdpau-driver
 Section: non-free/video
 Architecture: i386 amd64 armhf
 Multi-Arch: same
@@ -1029,7 +1029,7 @@ Description: Video Decode and Presentation API for Unix - NVIDIA driver${nvidia:
  ${nvidia:kmod:Description}
 
 #Package: ${nvidia}-smi
-Package: nvidia-smi
+Package: nvidia-legacy-390xx-smi
 Section: non-free/utils
 Architecture: i386 amd64 armhf ppc64el
 Depends:
@@ -1066,7 +1066,7 @@ Description: NVIDIA CUDA Multi Process Service (MPS)
  Pre-CUDA 4.0 APIs are not supported under CUDA MPS.
 
 #Package: ${libcuda1}
-Package: libcuda1
+Package: libnvidia-legacy-390xx-cuda1
 Architecture: i386 amd64 armhf ppc64el
 Multi-Arch: same
 Pre-Depends:
@@ -1120,7 +1120,7 @@ Description: NVIDIA CUDA Driver Library${nvidia:LegacyDesc}
  ${nvidia:kmod:Description}
 
 #Package: ${libcuda1}-i386
-Package: libcuda1-i386
+Package: libnvidia-legacy-390xx-cuda1-i386
 Architecture: i386
 Multi-Arch: foreign
 Depends:
@@ -1132,7 +1132,7 @@ Description: NVIDIA CUDA 32-bit runtime library${nvidia:LegacyDesc}
  architecture i386 enabled.
 
 #Package: lib${nvidia}-compiler
-Package: libnvidia-compiler
+Package: libnvidia-legacy-390xx-compiler
 Architecture: i386 amd64
 Multi-Arch: same
 Pre-Depends:
@@ -1151,7 +1151,7 @@ Description: NVIDIA runtime compiler library${nvidia:LegacyDesc}
  This package contains the runtime compiler library.
 
 #Package: lib${nvidia}-fatbinaryloader
-Package: libnvidia-fatbinaryloader
+Package: libnvidia-legacy-390xx-fatbinaryloader
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -1167,7 +1167,7 @@ Description: NVIDIA FAT binary loader${nvidia:LegacyDesc}
  This package contains the FAT multiarchitecture binary loader.
 
 #Package: lib${nvidia}-ptxjitcompiler1
-Package: libnvidia-ptxjitcompiler1
+Package: libnvidia-legacy-390xx-ptxjitcompiler1
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -1182,7 +1182,7 @@ Description: NVIDIA PTX JIT Compiler${nvidia:LegacyDesc}
  This package contains the runtime PTX JIT compiler library.
 
 #Package: lib${nvidia}-nvcuvid1
-Package: libnvcuvid1
+Package: libnvidia-legacy-390xx-nvcuvid1
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -1201,7 +1201,7 @@ Description: NVIDIA CUDA Video Decoder runtime library${nvidia:LegacyDesc}
  This package contains the nvcuvid runtime library.
 
 #Package: lib${nvidia}-encode1
-Package: libnvidia-encode1
+Package: libnvidia-legacy-390xx-encode1
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -1216,7 +1216,7 @@ Description: NVENC Video Encoding runtime library${nvidia:LegacyDesc}
  This package contains the nvidia-encode runtime library.
 
 #Package: lib${nvidia}-ifr1
-Package: libnvidia-ifr1
+Package: libnvidia-legacy-390xx-ifr1
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -1233,7 +1233,7 @@ Description: NVIDIA OpenGL-based Inband Frame Readback runtime library${nvidia:L
  This package contains the NvIFROpenGL runtime library.
 
 #Package: lib${nvidia}-fbc1
-Package: libnvidia-fbc1
+Package: libnvidia-legacy-390xx-fbc1
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -1250,7 +1250,7 @@ Description: NVIDIA OpenGL-based Framebuffer Capture runtime library${nvidia:Leg
  This package contains the NvFBCOpenGL runtime library.
 
 #Package: lib${nvidia}-ml1
-Package: libnvidia-ml1
+Package: libnvidia-legacy-390xx-ml1
 Architecture: i386 amd64 armhf ppc64el
 Multi-Arch: same
 Pre-Depends:
@@ -1283,7 +1283,7 @@ Description: NVIDIA OpenCL driver - common files
  driver (ICD) for OpenCL.
 
 #Package: ${nvidia}-opencl-icd
-Package: nvidia-opencl-icd
+Package: nvidia-legacy-390xx-opencl-icd
 Architecture: i386 amd64 ppc64el
 Multi-Arch: same
 Pre-Depends:
