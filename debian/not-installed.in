@@ -37,3 +37,5 @@ nvidia-cuda-mps-control.1
 nvidia-cuda-mps-server
 libOpenCL.so.1.0.0
 nvidia.icd
+10_nvidia.json
+10_nvidia_wayland.json

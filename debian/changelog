@@ -3,7 +3,7 @@ nvidia-graphics-drivers-legacy-390xx (390.48-3) UNRELEASED; urgency=medium
   * Fork as new legacy-390xx source package.
   * Do not build packages nvidia-detect, nvidia-legacy-check, nvidia-cuda-mps,
     nvidia-libopencl1, nvidia-opencl-common, nvidia-nonglvnd-vulkan-common,
-    nvidia-vulkan-common.
+    nvidia-vulkan-common, nvidia-egl-common, nvidia-egl-wayland-common.
 
  -- Andreas Beckmann <anbe@debian.org>  Tue, 17 Apr 2018 15:23:18 +0200
 
