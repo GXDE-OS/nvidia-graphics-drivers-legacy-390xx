@@ -50,10 +50,6 @@ Suggests:
  ${nvidia:kmod:source},
 Provides:
  nvidia-glx-any,
-Breaks:
- nvidia-glx${nvidia:Legacy},
-Replaces:
- nvidia-glx${nvidia:Legacy},
 Description: NVIDIA metapackage${nvidia:LegacyDesc}
  This metapackage depends on the NVIDIA binary driver and libraries
  that provide optimized hardware acceleration of
@@ -81,12 +77,6 @@ Provides:
  nvidia-driver-bin-${nvidia:Version},
 Conflicts:
  nvidia-driver-bin-${nvidia:Version},
-Breaks:
- ${nvidia}-driver (<< 343.22-2~),
- nvidia-glx${nvidia:Legacy} (<< 319),
-Replaces:
- ${nvidia}-driver (<< 343.22-2~),
- nvidia-glx${nvidia:Legacy} (<< 319),
 Description: NVIDIA driver support binaries${nvidia:LegacyDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -404,11 +394,6 @@ Provides:
  libnvidia-glcore-${nvidia:Version},
 Conflicts:
  libnvidia-glcore-${nvidia:Version},
- libgl1-nvidia-glx-${nvidia:Version},
-Breaks:
- libgl1-${nvidia}-glx (<< 355.11-5),
-Replaces:
- libgl1-${nvidia}-glx (<< 355.11-5),
 Description: NVIDIA binary OpenGL/GLX core libraries${nvidia:LegacyDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -754,18 +739,6 @@ Depends:
  ${misc:Depends}
 Provides:
  ${nvidia}-alternative--kmod-alias,
-Breaks:
- nvidia-settings (<< 319.49),
- nvidia-driver (<< 343.22-2~),
- nvidia-vdpau-driver (<< 340.46-2~),
- libcuda1 (<< 352.63),
- nvidia-opencl-icd (<< 340.46-2~),
- libnvidia-ifr1 (<< 340.46-2~),
- libnvidia-fbc1 (<< 340.46-2~),
- libnvidia-encode1 (<< 340.46-2~),
- libnvcuvid1 (<< 340.46-2~),
- libnvidia-ml1 (<< 340.46-2~),
- nvidia-smi (<< 340.46-2~),
 Description: allows the selection of NVIDIA as GLX provider${nvidia:LegacyDesc}
  In setups with several NVIDIA driver versions installed (e.g. current and
  legacy) this metapackage registers an alternative to allow easy switching
@@ -1122,8 +1095,6 @@ Pre-Depends:
 Depends:
  ${nvidia}-alternative (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Breaks:
- ${nvidia}-smi (<< ${nvidia:Version}),
 Homepage: https://developer.nvidia.com/nvidia-management-library-NVML
 Description: NVIDIA Management Library (NVML) runtime library${nvidia:LegacyDesc}
  The NVIDIA Management Library (NVML) provides a monitoring and management API.
