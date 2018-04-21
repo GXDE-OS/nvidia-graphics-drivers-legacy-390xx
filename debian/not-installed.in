@@ -31,3 +31,9 @@ tls_test
 tls_test_dso.so
 
 NVIDIA_Changelog
+
+nvidia-cuda-mps-control
+nvidia-cuda-mps-control.1
+nvidia-cuda-mps-server
+libOpenCL.so.1.0.0
+nvidia.icd
