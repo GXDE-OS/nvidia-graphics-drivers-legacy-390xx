@@ -624,7 +624,7 @@ Description: NVIDIA EGL installable client driver (ICD)
  EGL via GLVND which supports NVIDIA GPUs.
 
 #Package: lib${nvidia}-egl-wayland1
-Package: libnvidia-egl-wayland1
+Package: libnvidia-legacy-390xx-egl-wayland1
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Pre-Depends:
@@ -644,7 +644,7 @@ Description: NVIDIA binary Wayland EGL external platform library
  of Wayland as an EGL external platform.
 
 #Package: ${nvidia}-egl-wayland-icd
-Package: nvidia-egl-wayland-icd
+Package: nvidia-legacy-390xx-egl-wayland-icd
 Architecture: i386 amd64 armhf
 Multi-Arch: same
 Depends:
