@@ -1,10 +1,10 @@
-nvidia-graphics-drivers-legacy-390xx (390.87-3) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.87-3) unstable; urgency=medium
 
   * Synchronize packaging with nvidia-graphics-drivers (390.87-4).
   * Stop building the unused lib*-glvnd-nvidia packages to avoid clashes when
     uploading nvidia-graphics-drivers 390.xx to stretch.
 
- -- Andreas Beckmann <anbe@debian.org>  Mon, 10 Dec 2018 22:37:09 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 11 Dec 2018 02:33:32 +0100
 
 nvidia-graphics-drivers (390.87-4) unstable; urgency=medium
 
