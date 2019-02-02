@@ -180,7 +180,7 @@ Pre-Depends:
 Depends:
  lib${nvidia}-glcore (= ${binary:Version}),
  ${nvidia}-alternative (= ${binary:Version}),
- nvidia-support (>= 20120630),
+ nvidia-support,
  ${nvidia:xorgDepends},
  ${shlibs:Depends}, ${misc:Depends}
 Recommends:
@@ -346,10 +346,11 @@ Pre-Depends:
 Depends:
  ${nvidia}-alternative (= ${binary:Version}),
  lib${nvidia}-glcore (= ${binary:Version}),
- nvidia-installer-cleanup (>= 20130816) [i386],
  nvidia-support,
  ${shlibs:Depends}, ${misc:Depends}
 Recommends:
+# help ${nvidia:kmod:binary} to select the correct recommended alternative
+ ${nvidia}-driver-libs-nonglvnd (= ${binary:Version}),
  ${nvidia:kmod:binary},
 Suggests:
  ${nvidia:kmod:source},
@@ -763,7 +764,7 @@ Package: ${nvidia}-kernel-source
 Section: non-free/kernel
 Architecture: i386 amd64 armhf
 Depends:
- debhelper (>= 9),
+ debhelper-compat (= 12),
  make:any,
  quilt,
  xz-utils,
@@ -773,8 +774,6 @@ Recommends:
  ${nvidia}-kernel-support,
 Suggests:
  ${nvidia}-driver (>= ${nvidia:Version}) [!ppc64el],
-Breaks:
- module-assistant (<< 0.11.6~),
 Description: NVIDIA binary kernel module source${nvidia:LegacyDesc}
  This package provides the source for the NVIDIA Xorg binary kernel module
  needed by ${nvidia}-driver in a form suitable
@@ -862,6 +861,9 @@ Depends:
 Recommends:
  ${nvidia:kmod:binary},
  ${nvidia}-smi,
+# recommend lib${nvidia}-cfg1 to prevent nvidia-persistenced from choosing
+# the wrong provider for libnvidia-cfg1-any
+ lib${nvidia}-cfg1 (= ${binary:Version}),
  nvidia-persistenced,
  ${libcuda1}-i386 [amd64],
 Suggests:
