@@ -1,8 +1,8 @@
-nvidia-graphics-drivers-legacy-390xx (390.87-6) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.87-6) unstable; urgency=medium
 
   * Synchronize packaging with nvidia-graphics-drivers (390.87-8).
 
- -- Andreas Beckmann <anbe@debian.org>  Mon, 04 Feb 2019 02:10:10 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 04 Feb 2019 02:21:42 +0100
 
 nvidia-graphics-drivers (390.87-8) unstable; urgency=medium
 
