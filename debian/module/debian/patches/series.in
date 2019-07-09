@@ -1,5 +1,7 @@
 # kernel support
 do-div-cast.patch
+backport-changes-from-418.74-for-kernel-5.1.patch
+backport-changes-from-430.14-for-kernel-5.2.patch
 
 # build system updates
 use-kbuild-compiler.patch
