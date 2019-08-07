@@ -1,4 +1,4 @@
-nvidia-graphics-drivers-legacy-390xx (390.129-1) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.129-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.129 (2019-07-29).
     - Improved nvidia-bug-report.sh to grab the output of the `vulkaninfo`
@@ -11,7 +11,7 @@ nvidia-graphics-drivers-legacy-390xx (390.129-1) UNRELEASED; urgency=medium
   [ Andreas Beckmann ]
   * Bump Standards-Version to 4.4.0. No changes needed.
 
- -- Andreas Beckmann <anbe@debian.org>  Wed, 07 Aug 2019 10:42:50 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 07 Aug 2019 11:14:49 +0200
 
 nvidia-graphics-drivers-legacy-390xx (390.116-2) unstable; urgency=medium
 
