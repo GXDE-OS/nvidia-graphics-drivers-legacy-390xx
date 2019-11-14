@@ -1,3 +1,19 @@
+nvidia-graphics-drivers-legacy-390xx (390.132-1) UNRELEASED; urgency=medium
+
+  * New upstream legacy branch release 390.132 (2019-11-08).
+    - Fixed kernel module build problems with Linux kernel 5.4.0 release
+      candidates.
+    - Updated nvidia-bug-report.sh to collect information about X server crashes
+      from coredumpctl, when available.
+  * New upstream legacy branch release 340 series.
+    - Updated the nvidia-drm kernel module for compatibility with the removal
+      of the DRIVER_PRIME flag in recent Linux kernel versions.
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 14 Nov 2019 00:43:26 +0100
+
 nvidia-graphics-drivers-legacy-390xx (390.129-2) unstable; urgency=medium
 
   * Add mobile Kepler GPUs to supported EoL models. The are dropped from the
