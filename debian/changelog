@@ -1,4 +1,4 @@
-nvidia-graphics-drivers-legacy-390xx (390.132-1) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.132-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.132 (2019-11-08).
     - Fixed kernel module build problems with Linux kernel 5.4.0 release
@@ -12,7 +12,7 @@ nvidia-graphics-drivers-legacy-390xx (390.132-1) UNRELEASED; urgency=medium
   [ Andreas Beckmann ]
   * Refresh patches.
 
- -- Andreas Beckmann <anbe@debian.org>  Thu, 14 Nov 2019 00:43:26 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 14 Nov 2019 22:37:22 +0100
 
 nvidia-graphics-drivers-legacy-390xx (390.129-2) unstable; urgency=medium
 
