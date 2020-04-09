@@ -1,3 +1,15 @@
+nvidia-graphics-drivers-legacy-390xx (390.132-3) UNRELEASED; urgency=medium
+
+  [ Andreas Beckmann ]
+  * bug-control: Report information about more (virtual) packages (440.64-2).
+  * Update lintian overrides.
+
+  [ Luca Boccassi ]
+  * Import drmP.patch from Fedora to fix kernel module build failure for
+    Linux 5.5 and newer.  (Closes: #951091)
+
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 09 Apr 2020 18:22:22 +0200
+
 nvidia-graphics-drivers-legacy-390xx (390.132-2) unstable; urgency=medium
 
   * Create and commit tarball symlinks for legacy branches (430.64-1).
