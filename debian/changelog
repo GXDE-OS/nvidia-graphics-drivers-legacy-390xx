@@ -1,4 +1,4 @@
-nvidia-graphics-drivers-legacy-390xx (390.132-3) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.132-3) unstable; urgency=medium
 
   [ Andreas Beckmann ]
   * bug-control: Report information about more (virtual) packages (440.64-2).
@@ -8,7 +8,7 @@ nvidia-graphics-drivers-legacy-390xx (390.132-3) UNRELEASED; urgency=medium
   * Import drmP.patch from Fedora to fix kernel module build failure for
     Linux 5.5 and newer.  (Closes: #951091)
 
- -- Andreas Beckmann <anbe@debian.org>  Thu, 09 Apr 2020 18:22:22 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 09 Apr 2020 20:20:53 +0200
 
 nvidia-graphics-drivers-legacy-390xx (390.132-2) unstable; urgency=medium
 
