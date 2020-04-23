@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-legacy-390xx (390.132-3~deb10u1) buster; urgency=medium
+
+  * Rebuild for buster.
+
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 23 Apr 2020 23:22:27 +0200
+
 nvidia-graphics-drivers-legacy-390xx (390.132-3) unstable; urgency=medium
 
   [ Andreas Beckmann ]
