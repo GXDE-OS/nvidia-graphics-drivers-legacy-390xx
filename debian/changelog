@@ -1,9 +1,9 @@
-nvidia-graphics-drivers-legacy-390xx (390.132-5) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.132-5) unstable; urgency=medium
 
   * Fix #includes in conftest.sh to fix kernel module build for Linux 5.7,
     thanks to Jiri Palecek.  (Closes: #960735)
 
- -- Andreas Beckmann <anbe@debian.org>  Wed, 20 May 2020 13:13:15 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 20 May 2020 17:13:15 +0200
 
 nvidia-graphics-drivers-legacy-390xx (390.132-4) unstable; urgency=medium
 
