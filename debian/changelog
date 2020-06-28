@@ -1,3 +1,40 @@
+nvidia-graphics-drivers-legacy-390xx (390.138-1) UNRELEASED; urgency=medium
+
+  * New upstream legacy branch release 390.138 (2020-06-24).
+    * Fixed CVE-2020-5963, CVE-2020-5967.  (Closes: #963908)
+      https://nvidia.custhelp.com/app/answers/detail/a_id/5031
+    - Fixed a driver installation failure on Linux kernel 5.6 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "implicit declaration of function 'timespec_to_ns'".
+    - Fixed a driver installation failure on Linux kernel 5.6 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "implicit declaration of function 'getrawmonotonic'".
+    - Fixed a driver installation failure on Linux kernel 5.6 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "implicit declaration of function 'getnstimeofday'".
+    - Fixed a driver installation failure on Linux kernel 5.6 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "dereferencing pointer to incomplete type 'struct timeval'".
+    - Fixed a driver installation failure on Linux kernel 5.6 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "implicit declaration of function 'jiffies_to_timespec'".
+    - Fixed driver installation failure on Linux kernel 5.6 release candidates,
+      where the NVIDIA kernel module failed to build with error "passing
+      argument 4 of 'proc_create_data' from incompatible pointer type".
+    - Fixed driver installation failure on Linux kernel 5.6 release candidates,
+      where the NVIDIA kernel module failed to build with error "implicit
+      declaration of function 'ioremap_nocache'".
+    - Fixed driver installation failure on Oracle Linux 7.7 systems, where the
+      NVIDIA kernel module failed to build with error "unknown type name
+      'vm_fault_t'".
+    - Add PRIME Synchronization support for Linux kernel 5.4 and newer.
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+  * Update lintian overrides.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 28 Jun 2020 22:43:10 +0200
+
 nvidia-graphics-drivers-legacy-390xx (390.132-5) unstable; urgency=medium
 
   * Fix #includes in conftest.sh to fix kernel module build for Linux 5.7,
