@@ -34,6 +34,7 @@ nvidia-graphics-drivers-legacy-390xx (390.138-1) unstable; urgency=medium
       NVIDIA kernel module failed to build with error "unknown type name
       'vm_fault_t'".
     - Add PRIME Synchronization support for Linux kernel 5.4 and newer.
+      (Closes: #948568)
 
   [ Andreas Beckmann ]
   * Refresh patches.
