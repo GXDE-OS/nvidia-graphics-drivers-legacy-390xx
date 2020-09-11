@@ -2,6 +2,7 @@ nvidia-graphics-drivers-legacy-390xx (390.138-3) UNRELEASED; urgency=medium
 
   * Temporarily disable building the nvidia-uvm module.
     (Closes: #969085, #969755, #969889, #969894, #970093)
+  * Update lintian overrides.
 
  -- Andreas Beckmann <anbe@debian.org>  Sat, 12 Sep 2020 00:11:54 +0200
 
