@@ -1,0 +1,18 @@
+Author: Andreas Beckmann <anbe@debian.org>
+Description: HACK! disable building the nvidia-uvm module
+ FTBFS in Linux 5.8 with
+   FATAL: modpost: GPL-incompatible module nvidia-uvm.ko uses GPL-only symbol 'radix_tree_preloads'
+ 415.18 fixed this by switching the module license to "Dual MIT/GPL"
+Bug-Debian: https://bugs.debian.org/969085
+Forwarded: not-needed
+
+--- a/Makefile
++++ b/Makefile
+@@ -60,6 +60,7 @@ else
+   endif
+ 
+   NV_KERNEL_MODULES ?= $(wildcard nvidia nvidia-uvm nvidia-modeset nvidia-drm nvidia-vgpu-vfio)
++  NV_EXCLUDE_KERNEL_MODULES += nvidia-uvm
+   NV_KERNEL_MODULES := $(filter-out $(NV_EXCLUDE_KERNEL_MODULES), \
+                                     $(NV_KERNEL_MODULES))
+   NV_VERBOSE ?=
