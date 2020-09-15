@@ -8,11 +8,12 @@ Forwarded: not-needed
 
 --- a/Makefile
 +++ b/Makefile
-@@ -60,6 +60,7 @@ else
-   endif
+@@ -19,6 +19,8 @@ ifneq ($(KERNELRELEASE),)
+   include $(src)/Kbuild
+ else
  
-   NV_KERNEL_MODULES ?= $(wildcard nvidia nvidia-uvm nvidia-modeset nvidia-drm nvidia-vgpu-vfio)
 +  NV_EXCLUDE_KERNEL_MODULES += nvidia-uvm
-   NV_KERNEL_MODULES := $(filter-out $(NV_EXCLUDE_KERNEL_MODULES), \
-                                     $(NV_KERNEL_MODULES))
-   NV_VERBOSE ?=
++
+   # Determine the location of the Linux kernel source tree, and of the
+   # kernel's output tree.  Use this to invoke Kbuild, and pass the paths
+   # to the source and output trees to NVIDIA's Kbuild file via

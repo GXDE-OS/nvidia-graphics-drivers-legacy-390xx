@@ -1,3 +1,10 @@
+nvidia-graphics-drivers-legacy-390xx (390.138-4) UNRELEASED; urgency=medium
+
+  * Do not break non-uvm architectures when disabling the uvm module.
+    (Closes: #970390)
+
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 15 Sep 2020 23:53:14 +0200
+
 nvidia-graphics-drivers-legacy-390xx (390.138-3) unstable; urgency=medium
 
   * Temporarily disable building the nvidia-uvm module.
