@@ -1,11 +1,12 @@
-nvidia-graphics-drivers-legacy-390xx (390.138-5) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.138-5) unstable; urgency=medium
 
   * Backport get_user_pages_remote, vga_tryget,
     drm_driver_has_gem_free_object, drm_display_mode_has_vrefresh,
     drm_driver_master_set_has_int_return_type and drm_gem_object_put_unlocked
     changes from 455.23.04 to fix kernel module build for Linux 5.9.
+    (Closes: #972468, #972511)
 
- -- Andreas Beckmann <anbe@debian.org>  Mon, 19 Oct 2020 04:44:19 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 28 Oct 2020 01:00:51 +0100
 
 nvidia-graphics-drivers-legacy-390xx (390.138-4) unstable; urgency=medium
 
