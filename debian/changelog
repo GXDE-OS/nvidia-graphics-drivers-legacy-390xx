@@ -97,6 +97,47 @@ nvidia-graphics-drivers-legacy-390xx (390.138-1) unstable; urgency=medium
 
  -- Andreas Beckmann <anbe@debian.org>  Sun, 28 Jun 2020 23:36:28 +0200
 
+nvidia-graphics-drivers (390.138-1) stretch; urgency=medium
+
+  * New upstream legacy branch release 390.138 (2020-06-24).
+    * Fixed CVE-2020-5963, CVE-2020-5967.  (Closes: #963766)
+      https://nvidia.custhelp.com/app/answers/detail/a_id/5031
+    - Fixed a driver installation failure on Linux kernel 5.6 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "implicit declaration of function 'timespec_to_ns'".
+    - Fixed a driver installation failure on Linux kernel 5.6 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "implicit declaration of function 'getrawmonotonic'".
+    - Fixed a driver installation failure on Linux kernel 5.6 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "implicit declaration of function 'getnstimeofday'".
+    - Fixed a driver installation failure on Linux kernel 5.6 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "dereferencing pointer to incomplete type 'struct timeval'".
+    - Fixed a driver installation failure on Linux kernel 5.6 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "implicit declaration of function 'jiffies_to_timespec'".
+    - Fixed driver installation failure on Linux kernel 5.6 release candidates,
+      where the NVIDIA kernel module failed to build with error "passing
+      argument 4 of 'proc_create_data' from incompatible pointer type".
+    - Fixed driver installation failure on Linux kernel 5.6 release candidates,
+      where the NVIDIA kernel module failed to build with error "implicit
+      declaration of function 'ioremap_nocache'".  (Closes: #956458)
+    - Fixed driver installation failure on Oracle Linux 7.7 systems, where the
+      NVIDIA kernel module failed to build with error "unknown type name
+      'vm_fault_t'".
+    - Add PRIME Synchronization support for Linux kernel 5.4 and newer.
+      (Closes: #948568)
+
+  [ Andreas Beckmann ]
+  * Fix #includes in conftest.sh to fix kernel module build for Linux 5.7,
+    thanks to Jiri Palecek.  (Closes: #960735)
+  * Refresh patches.
+  * Update lintian overrides.
+  * Upload to stretch.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 28 Jun 2020 22:35:52 +0200
+
 nvidia-graphics-drivers-legacy-390xx (390.132-5) unstable; urgency=medium
 
   * Fix #includes in conftest.sh to fix kernel module build for Linux 5.7,
@@ -163,6 +204,45 @@ nvidia-graphics-drivers-legacy-390xx (390.132-1) unstable; urgency=medium
 
  -- Andreas Beckmann <anbe@debian.org>  Thu, 14 Nov 2019 22:37:22 +0100
 
+nvidia-graphics-drivers (390.132-1) stretch; urgency=medium
+
+  * New upstream legacy branch release 390.132 (2019-11-08).
+    - Fixed kernel module build problems with Linux kernel 5.4.0 release
+      candidates.
+    - Updated nvidia-bug-report.sh to collect information about X server crashes
+      from coredumpctl, when available.
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+  * debian/gen-control.pl: Support substitutions in the Architecture field and
+    skip packages with empty or commented Architecture field (430.50-2).
+  * Create and commit tarball symlinks for legacy branches (430.64-1).
+  * Allow alternative libnvidia-{tesla,legacy}-*-ml1 packages to substitute
+    libnvidia-ml1 in third-party packages (430.64-2).
+    - Add Provides: libnvidia-ml.so.1 (= ${nvidia:Version}).
+    - Generate alternative versioned dependency on libnvidia-ml.so.1 through
+      the symbols file.
+  * Allow alternative libnvidia-{tesla,legacy}-*-cuda1 packages to substitute
+    libcuda1 in third-party packages (430.64-3).
+    - Add Provides: libcuda.so.1 (= ${nvidia:Version}).
+    - Generate alternative versioned dependency on libcuda.so.1 through the
+      symbols file.
+  * Use substitution to keep Standards-Version in sync (430.64-5).
+  * Insert '-' between suffix ending with digit and SOVERSION (435.21-3).
+  * Rename "legacy" variables to more generic "variant" (440.44-2).
+  * bug-control: Report information about more (virtual) packages (440.64-2).
+  * Bump Standards-Version to 4.5.0. No changes needed.
+  * Update lintian overrides.
+  * *.symbols: List libraries from src:libglvnd (not in stretch) as second
+    (instead of preferred) alternative dependencies.
+  * Upload to stretch.
+
+  [ Luca Boccassi ]
+  * Import drmP.patch from Fedora to fix kernel module build failure for
+    Linux 5.5 and newer.  (Closes: #951091)
+
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 21 Apr 2020 20:49:15 +0200
+
 nvidia-graphics-drivers-legacy-390xx (390.129-2) unstable; urgency=medium
 
   * Add mobile Kepler GPUs to supported EoL models. The are dropped from the
@@ -226,6 +306,49 @@ nvidia-graphics-drivers-legacy-390xx (390.116-1) unstable; urgency=medium
   * Update symbols files.
 
  -- Andreas Beckmann <anbe@debian.org>  Fri, 01 Mar 2019 22:06:12 +0100
+
+nvidia-graphics-drivers (390.116-1) stretch; urgency=medium
+
+  * New upstream legacy branch release 390.116 (2019-02-22).
+    * Fixed CVE‑2018‑6260.  (Closes: #913467)
+      https://nvidia.custhelp.com/app/answers/detail/a_id/4772
+    - Fixed build failures which resulted in errors like "implicit declaration
+      of function drm_...", when building the NVIDIA DRM kernel module for Linux
+      kernel 5.0 release candidates.
+    - Fixed a bug which could cause VK_KHR_external_semaphore_fd operations
+      to fail.
+    - Fixed a build failure, "implicit declaration of function
+      'vm_insert_pfn'", when building the NVIDIA DRM kernel module for Linux
+      kernel 4.20 release candidates.
+    - Fixed a build failure, "unknown type name 'ipmi_user_t'", when building
+      the NVIDIA kernel module for Linux kernel 4.20 release candidates.
+    - Fixed a bug that caused mode switches to fail when an SDI output board was
+      connected.
+    - Fixed a bug that could cause rendering corruption in Vulkan programs.
+    - Fixed a bug that caused vkGetPhysicalDeviceDisplayPropertiesKHR() to
+      occasionally return incorrect values for physicalResolution.
+  * New upstream legacy branch release 367 series.
+    - Added a new kernel module parameter, NVreg_RestrictProfilingToAdminUsers,
+      to allow restricting the use of GPU performance counters to system
+      administrators only.
+
+  [ Luca Boccassi ]
+  * Drop kmem_cache_create_usercopy.patch, drm-mode.patch,
+    ipmi-user.patch, vm-insert-pfn.patch: fixed upstream.
+  * Update symbols files.
+
+  [ Andreas Beckmann ]
+  * nvidia-detect: stretch now has a 390.xx driver.
+  * nvidia-kernel-source: Bump debhelper dependency to match Build-Depends.
+  * Upload to stretch.
+
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 12 Mar 2019 09:27:07 +0100
+
+nvidia-graphics-drivers (390.87-8~deb9u1) stretch; urgency=medium
+
+  * Rebuild for stretch.
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 06 Feb 2019 10:00:53 +0100
 
 nvidia-graphics-drivers-legacy-390xx (390.87-6) unstable; urgency=medium
 
