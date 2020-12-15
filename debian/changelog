@@ -1,11 +1,11 @@
-nvidia-graphics-drivers-legacy-390xx (390.138-6) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.138-6) unstable; urgency=medium
 
   * Backport drm_prime_pages_to_sg_has_drm_device_arg and get_dma_ops changes
     from 455.45.01 to fix kernel module build for Linux 5.10.
   * Use a version=4 watch file.
   * Bump Standards-Version to 4.5.1. No changes needed.
 
- -- Andreas Beckmann <anbe@debian.org>  Wed, 16 Dec 2020 00:21:28 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 16 Dec 2020 00:28:48 +0100
 
 nvidia-graphics-drivers-legacy-390xx (390.138-5) unstable; urgency=medium
 
