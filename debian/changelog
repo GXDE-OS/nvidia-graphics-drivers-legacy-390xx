@@ -1,7 +1,7 @@
-nvidia-graphics-drivers-legacy-390xx (390.141-1) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.141-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.141 (2021-01-07).
-    * Fixed CVE‑2021‑1056.
+    * Fixed CVE‑2021‑1056.  (Closes: #979672)
       https://nvidia.custhelp.com/app/answers/detail/a_id/5142
     - Fixed a driver installation failure on Linux kernel 5.8 release
       candidates, where the NVIDIA kernel module failed to build with error
@@ -16,7 +16,7 @@ nvidia-graphics-drivers-legacy-390xx (390.141-1) UNRELEASED; urgency=medium
   * Update symbols files.
   * Update lintian overrides.
 
- -- Andreas Beckmann <anbe@debian.org>  Sun, 10 Jan 2021 02:48:12 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 10 Jan 2021 03:31:58 +0100
 
 nvidia-graphics-drivers-legacy-390xx (390.138-6) unstable; urgency=medium
 
