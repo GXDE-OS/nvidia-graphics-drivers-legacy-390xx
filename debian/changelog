@@ -11,6 +11,7 @@ nvidia-graphics-drivers-legacy-390xx (390.141-1) UNRELEASED; urgency=medium
       "too many arguments to function '__vmalloc'".
 
   [ Andreas Beckmann ]
+  * Re-enable building the nvidia-uvm module.
   * Refresh patches.
   * Update symbols files.
   * Update lintian overrides.
