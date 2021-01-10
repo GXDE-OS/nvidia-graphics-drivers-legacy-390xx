@@ -1,3 +1,22 @@
+nvidia-graphics-drivers-legacy-390xx (390.141-1) UNRELEASED; urgency=medium
+
+  * New upstream legacy branch release 390.141 (2021-01-07).
+    * Fixed CVE‑2021‑1056.
+      https://nvidia.custhelp.com/app/answers/detail/a_id/5142
+    - Fixed a driver installation failure on Linux kernel 5.8 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "'struct mm_struct' has no member named 'mmap_sem'".
+    - Fixed a driver installation failure on Linux kernel 5.8 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "too many arguments to function '__vmalloc'".
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+  * Update symbols files.
+  * Update lintian overrides.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 10 Jan 2021 02:48:12 +0100
+
 nvidia-graphics-drivers-legacy-390xx (390.138-6) unstable; urgency=medium
 
   * Backport drm_prime_pages_to_sg_has_drm_device_arg and get_dma_ops changes
@@ -56,6 +75,7 @@ nvidia-graphics-drivers-legacy-390xx (390.138-2) unstable; urgency=medium
     a) commenting the last paragraph in dkms.conf and
     b) building with NV_EXCLUDE_KERNEL_MODULES=nvidia-uvm set in the
        environment.
+  * Update lintian overrides.
 
   [ Vincent Cheng ]
   * Remove myself from Uploaders.
@@ -139,18 +159,21 @@ nvidia-graphics-drivers (390.138-1) stretch; urgency=medium
       (Closes: #948568)
 
   [ Andreas Beckmann ]
-  * Fix #includes in conftest.sh to fix kernel module build for Linux 5.7,
-    thanks to Jiri Palecek.  (Closes: #960735)
   * Refresh patches.
   * Update lintian overrides.
   * Upload to stretch.
+
+  [ Jiri Palecek ]
+  * Fix #includes in conftest.sh to fix kernel module build for Linux 5.7.
+    (Closes: #960735)
 
  -- Andreas Beckmann <anbe@debian.org>  Sun, 28 Jun 2020 22:35:52 +0200
 
 nvidia-graphics-drivers-legacy-390xx (390.132-5) unstable; urgency=medium
 
-  * Fix #includes in conftest.sh to fix kernel module build for Linux 5.7,
-    thanks to Jiri Palecek.  (Closes: #960735)
+  [ Jiri Palecek ]
+  * Fix #includes in conftest.sh to fix kernel module build for Linux 5.7.
+    (Closes: #960735)
 
  -- Andreas Beckmann <anbe@debian.org>  Wed, 20 May 2020 17:13:15 +0200
 
