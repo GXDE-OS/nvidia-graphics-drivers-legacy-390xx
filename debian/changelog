@@ -7,7 +7,7 @@ nvidia-graphics-drivers-legacy-390xx (390.141-2) UNRELEASED; urgency=medium
 nvidia-graphics-drivers-legacy-390xx (390.141-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.141 (2021-01-07).
-    * Fixed CVE‑2021‑1056.  (Closes: #979672)
+    * Fixed CVE-2021-1056.  (Closes: #979672)
       https://nvidia.custhelp.com/app/answers/detail/a_id/5142
     - Fixed a driver installation failure on Linux kernel 5.8 release
       candidates, where the NVIDIA kernel module failed to build with error
@@ -28,7 +28,7 @@ nvidia-graphics-drivers-legacy-390xx (390.138-6) unstable; urgency=medium
 
   * Backport drm_prime_pages_to_sg_has_drm_device_arg and get_dma_ops changes
     from 455.45.01 to fix kernel module build for Linux 5.10.
-  * Use a version=4 watch file.
+  * Bump watch file version to 4.
   * Bump Standards-Version to 4.5.1. No changes needed.
 
  -- Andreas Beckmann <anbe@debian.org>  Wed, 16 Dec 2020 00:28:48 +0100
@@ -317,7 +317,7 @@ nvidia-graphics-drivers-legacy-390xx (390.116-2) unstable; urgency=medium
 nvidia-graphics-drivers-legacy-390xx (390.116-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.116 (2019-02-22).
-    * Fixed CVE‑2018‑6260.  (Closes: #913467)
+    * Fixed CVE-2018-6260.  (Closes: #913467)
       https://nvidia.custhelp.com/app/answers/detail/a_id/4772
     - Fixed build failures which resulted in errors like "implicit declaration
       of function drm_...", when building the NVIDIA DRM kernel module for Linux
@@ -349,7 +349,7 @@ nvidia-graphics-drivers-legacy-390xx (390.116-1) unstable; urgency=medium
 nvidia-graphics-drivers (390.116-1) stretch; urgency=medium
 
   * New upstream legacy branch release 390.116 (2019-02-22).
-    * Fixed CVE‑2018‑6260.  (Closes: #913467)
+    * Fixed CVE-2018-6260.  (Closes: #913467)
       https://nvidia.custhelp.com/app/answers/detail/a_id/4772
     - Fixed build failures which resulted in errors like "implicit declaration
       of function drm_...", when building the NVIDIA DRM kernel module for Linux
