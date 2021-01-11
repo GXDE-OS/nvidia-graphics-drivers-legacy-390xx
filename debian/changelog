@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-legacy-390xx (390.141-2) UNRELEASED; urgency=medium
+
+  * Really re-enable building the nvidia-uvm module.
+
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 11 Jan 2021 14:37:32 +0100
+
 nvidia-graphics-drivers-legacy-390xx (390.141-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.141 (2021-01-07).
