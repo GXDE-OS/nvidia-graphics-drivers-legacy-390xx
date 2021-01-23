@@ -15,11 +15,12 @@ nvidia-graphics-drivers-legacy-390xx (390.141-1) unstable; urgency=medium
     - Fixed a driver installation failure on Linux kernel 5.8 release
       candidates, where the NVIDIA kernel module failed to build with error
       "too many arguments to function '__vmalloc'".
+    * Improved compatibility with recent Linux kernels.
 
   [ Andreas Beckmann ]
   * Re-enable building the nvidia-uvm module.
   * Refresh patches.
-  * Update symbols files.
+  * Update glvnd symbols files.
   * Update lintian overrides.
 
  -- Andreas Beckmann <anbe@debian.org>  Sun, 10 Jan 2021 03:31:58 +0100
