@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-legacy-390xx (390.141-2~deb10u1) buster; urgency=medium
+
+  * Rebuild for buster.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 23 Jan 2021 18:04:20 +0100
+
 nvidia-graphics-drivers-legacy-390xx (390.141-2) unstable; urgency=medium
 
   * Really re-enable building the nvidia-uvm module.
@@ -74,15 +80,6 @@ nvidia-graphics-drivers-legacy-390xx (390.138-2) unstable; urgency=medium
   * Backport nv_vmalloc changes from 450.57
     and work around mmap_{sem=>lock} rename
     to fix kernel module build for Linux 5.8.  (Partly addresses #969085)
-  * Note: The nvidia-uvm kernel module will fail to build for Linux 5.8 due to
-    licence incompatibility unless cfa6705d89b6562f79c40c249f8d94073c4276e4
-    "radix-tree: Use local_lock for protection" (which effectively made
-    radix_tree_preloads GPL-only) gets reverted in Linux 5.8 or NVIDIA
-    switches the nvidia-uvm module license to "Dual MIT/GPL" as in 415.18.
-  * Note: Building the nvidia-uvm module can be temporarily disabled by
-    a) commenting the last paragraph in dkms.conf and
-    b) building with NV_EXCLUDE_KERNEL_MODULES=nvidia-uvm set in the
-       environment.
   * Update lintian overrides.
 
   [ Vincent Cheng ]
