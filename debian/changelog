@@ -1,3 +1,10 @@
+nvidia-graphics-drivers-legacy-390xx (390.141-3) UNRELEASED; urgency=medium
+
+  * nvidia-legacy-390xx-alternative: Add libnvidia-ml.so slave alternative if
+    libnvidia-ml-dev is installed (460.56-2).  (Closes: #984881)
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 13 Mar 2021 22:37:21 +0100
+
 nvidia-graphics-drivers-legacy-390xx (390.141-2~deb10u1) buster; urgency=medium
 
   * Rebuild for buster.
