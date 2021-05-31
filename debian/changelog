@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-legacy-390xx (390.143-1~deb10u1) buster; urgency=medium
+
+  * Rebuild for buster.
+
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 31 May 2021 11:44:25 +0200
+
 nvidia-graphics-drivers-legacy-390xx (390.143-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.143 (2021-04-19).
