@@ -8,8 +8,8 @@ nvidia-graphics-drivers-legacy-390xx (390.144-1) unstable; urgency=medium
 
   [ Andreas Beckmann ]
   * Refresh patches.
-  * nvidia-legacy-390xx-driver-libs: Add Recommends: libnvidia-encode1
-    (470.42.01-1).  (Closes: #989885)
+  * nvidia-legacy-390xx-driver-libs: Add Recommends:
+    libnvidia-legacy-390xx-encode1 (470.42.01-1).  (Closes: #989885)
   * debian/gen-control.pl: Support substitutions in the Vcs-Git field
     (470.57.02-1).
   * Compute and substitute the Git branch instead of hardcoding it
