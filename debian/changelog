@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-legacy-390xx (390.147-3) unstable; urgency=medium
+
+  * Fix incomplete backport of pde_data changes from 510.39.01.
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 16 Feb 2022 22:35:21 +0100
+
 nvidia-graphics-drivers-legacy-390xx (390.147-2) unstable; urgency=medium
 
   * Add xorg-video-abi-25 (Xorg Xserver 21) as alternative dependency.
