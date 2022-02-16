@@ -1,11 +1,11 @@
-nvidia-graphics-drivers-legacy-390xx (390.147-2) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.147-2) unstable; urgency=medium
 
   * Add xorg-video-abi-25 (Xorg Xserver 21) as alternative dependency.
     (Closes: #1005804)
   * Backport pde_data changes from 510.39.01 to fix kernel module build for
     Linux 5.17.
 
- -- Andreas Beckmann <anbe@debian.org>  Wed, 16 Feb 2022 17:51:29 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 16 Feb 2022 18:28:11 +0100
 
 nvidia-graphics-drivers-legacy-390xx (390.147-1) unstable; urgency=medium
 
