@@ -1,6 +1,7 @@
 nvidia-graphics-drivers-legacy-390xx (390.147-3) unstable; urgency=medium
 
   * Fix incomplete backport of pde_data changes from 510.39.01.
+    (Closes: #1005909)
 
  -- Andreas Beckmann <anbe@debian.org>  Wed, 16 Feb 2022 22:35:21 +0100
 
@@ -28,7 +29,7 @@ nvidia-graphics-drivers-legacy-390xx (390.147-1) unstable; urgency=medium
     (Closes: #996595)
   * Fix bashisms in upstream scripts (470.82.00-1).
   * libegl1-mesa is a transitional package since buster (470.82.00-1).
-  * nvidia-kernel-support: Provide
+  * nvidia-legacy-390xx-kernel-support: Provide
     /etc/modprobe.d/nvidia-options.conf as a template taking into account the
     module renaming. This is a slave alternative of the nvidia alternative
     (470.86-1).  (Closes: #999670)
