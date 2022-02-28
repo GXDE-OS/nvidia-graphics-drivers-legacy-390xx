@@ -18,7 +18,6 @@ gl.h
 glext.h
 glx.h
 glxext.h
-libGL.la
 
 # installed by dh_installchangelogs
 NVIDIA_Changelog
@@ -69,5 +68,7 @@ nvidia-cuda-mps-control
 nvidia-cuda-mps-control.1
 
 # not shipped
+
+libGL.la
 
 libnvidia-wfb.so.#VERSION#
