@@ -1,10 +1,10 @@
-nvidia-graphics-drivers-legacy-390xx (390.147-4) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.147-4) unstable; urgency=medium
 
   * dkms.conf: Use a BUILD_EXCLUSIVE equivalent hack to skip building for -rt
     kernels, not supported upstream (510.54-1).
   * Declare Testsuite: autopkgtest-pkg-dkms (510.54-1).
 
- -- Andreas Beckmann <anbe@debian.org>  Mon, 28 Feb 2022 13:56:08 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 12 Apr 2022 20:59:01 +0200
 
 nvidia-graphics-drivers-legacy-390xx (390.147-3) unstable; urgency=medium
 
