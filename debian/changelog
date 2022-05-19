@@ -1,3 +1,24 @@
+nvidia-graphics-drivers-legacy-390xx (390.151-1) UNRELEASED; urgency=medium
+
+  * New upstream legacy branch release 390.151 (2022-05-16).
+    * Fixed CVE-2022-28181, CVE-2022-28185.  (Closes: #1011142, #1004849)
+      https://nvidia.custhelp.com/app/answers/detail/a_id/5353
+    - Fixed a bug which prevented kernel modules linked from precompiled
+      kernel interface object files from being loaded on recent Linux
+      kernels. This affected custom packages which were prepared with
+      nvidia-installer's --add-this-kernel option, for example.
+    - Fixed a driver installation failure on Linux kernel 5.17 release
+      candidates, where the NVIDIA kernel module failed to build with error
+      "implicit declaration of function 'PDE'".
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+  * Work around architecture misdetection when building the kernel modules in
+    an armhf environment on an arm64 host.  (Closes: #1010230)
+  * Bump Standards-Version to 4.6.1. No changes needed.
+
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 17 May 2022 15:42:34 +0200
+
 nvidia-graphics-drivers-legacy-390xx (390.147-4) unstable; urgency=medium
 
   * dkms.conf: Use a BUILD_EXCLUSIVE equivalent hack to skip building for -rt
