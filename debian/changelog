@@ -1,4 +1,4 @@
-nvidia-graphics-drivers-legacy-390xx (390.151-1) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.151-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.151 (2022-05-16).
     * Fixed CVE-2022-28181, CVE-2022-28185.  (Closes: #1011142, #1004849)
@@ -17,7 +17,7 @@ nvidia-graphics-drivers-legacy-390xx (390.151-1) UNRELEASED; urgency=medium
     an armhf environment on an arm64 host.  (Closes: #1010230)
   * Bump Standards-Version to 4.6.1. No changes needed.
 
- -- Andreas Beckmann <anbe@debian.org>  Tue, 17 May 2022 15:42:34 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 19 May 2022 12:07:44 +0200
 
 nvidia-graphics-drivers-legacy-390xx (390.147-4) unstable; urgency=medium
 
