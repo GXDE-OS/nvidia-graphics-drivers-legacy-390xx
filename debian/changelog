@@ -82,6 +82,18 @@ nvidia-graphics-drivers-legacy-390xx (390.144-1~deb10u1) buster; urgency=medium
 
  -- Andreas Beckmann <anbe@debian.org>  Mon, 26 Jul 2021 10:50:49 +0200
 
+nvidia-graphics-drivers (390.144-1~deb9u1) stretch-security; urgency=high
+
+  * Non-maintainer upload by the LTS team.
+  * Fix CVE-2021-1076, CVE-2021-1093, CVE-2021-1094, CVE-2021-1095
+    and CVE-2021-1056.  (Closes: #987216, #991351)
+    Multiple security vulnerabilities have been discovered in the
+    NVIDIA binary driver and libraries that provide optimized
+    hardware acceleration which may lead to denial of service,
+    information disclosure, or data corruption.
+
+ -- Markus Koschany <apo@debian.org>  Tue, 18 Jan 2022 18:50:56 +0100
+
 nvidia-graphics-drivers-legacy-390xx (390.144-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.144 (2021-07-20).
