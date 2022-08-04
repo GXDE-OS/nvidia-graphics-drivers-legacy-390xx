@@ -74,6 +74,7 @@ Depends:
  glx-alternative-nvidia (>= 0.8.4~) [!ppc64el],
  ${misc:Depends}
 Provides:
+ nvidia-alternative-any,
  ${nvidia}-alternative--kmod-alias,
 Conflicts:
  libgldispatch0-nvidia,
@@ -126,7 +127,6 @@ Multi-Arch: foreign
 Pre-Depends:
  nvidia-installer-cleanup,
 Depends:
- dkms,
  ${nvidia}-kernel-support--v1,
  ${misc:Depends}
 Recommends:
@@ -134,7 +134,7 @@ Recommends:
 Provides:
  ${nvidia}-kernel-${nvidia:Version},
 Description: NVIDIA binary kernel module DKMS source${nvidia:VariantDesc}
- This package builds the NVIDIA Xorg binary kernel module needed by
+ This package builds the NVIDIA binary kernel modules needed by
  ${nvidia}-driver, using DKMS.
  Provided that you have the kernel header packages installed, the kernel
  module will be built for your running kernel and automatically rebuilt for
@@ -158,19 +158,17 @@ Section: non-free/kernel
 Architecture: i386 amd64 armhf
 Depends:
  debhelper-compat (= ${nvidia:debhelper-compat}),
- make:any,
  quilt,
- xz-utils,
  ${misc:Depends}
 Recommends:
- module-assistant | kernel-package,
- ${nvidia}-kernel-support,
+ module-assistant,
+ ${nvidia}-kernel-support--v1,
 Suggests:
  ${nvidia}-driver (>= ${nvidia:Version}) [!ppc64el],
 Description: NVIDIA binary kernel module source${nvidia:VariantDesc}
- This package provides the source for the NVIDIA Xorg binary kernel module
+ This package provides the source for the NVIDIA binary kernel modules
  needed by ${nvidia}-driver in a form suitable
- for use by module-assistant or kernel-package.
+ for use by module-assistant.
  .
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
