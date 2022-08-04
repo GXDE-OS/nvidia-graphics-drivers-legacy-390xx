@@ -1,7 +1,7 @@
-nvidia-graphics-drivers-legacy-390xx (390.154-1) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.154-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.154 (2022-08-02).
-    * Fixed CVE-2022-31607, CVE-2022-31608, CVE-2022-31615.
+    * Fixed CVE-2022-31607, CVE-2022-31608, CVE-2022-31615. (Closes: #1016616)
       https://nvidia.custhelp.com/app/answers/detail/a_id/5383
     * Improved compatibility with recent Linux kernels.
 
@@ -18,7 +18,7 @@ nvidia-graphics-drivers-legacy-390xx (390.154-1) UNRELEASED; urgency=medium
     (470.141.03-1).
   * Update lintian overrides.
 
- -- Andreas Beckmann <anbe@debian.org>  Thu, 04 Aug 2022 01:58:02 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 04 Aug 2022 11:32:14 +0200
 
 nvidia-graphics-drivers-legacy-390xx (390.151-2) unstable; urgency=medium
 
