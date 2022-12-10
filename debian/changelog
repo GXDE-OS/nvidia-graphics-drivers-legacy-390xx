@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-legacy-390xx (390.157-1~deb11u1) bullseye; urgency=medium
+
+  * Rebuild for bullseye.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 10 Dec 2022 01:35:41 +0100
+
 nvidia-graphics-drivers-legacy-390xx (390.157-1) unstable; urgency=medium
 
   * New upstream legacy branch release 390.157 (2022-11-22).
