@@ -1,3 +1,16 @@
+nvidia-graphics-drivers-legacy-390xx (390.157-2) UNRELEASED; urgency=medium
+
+  * Support acpi_op_remove callback returning void to fix kernel module build
+    for Linux 6.2.
+  * Backport drm_connector_has_override_edid changes from 525.78.01 to fix
+    kernel module build for Linux 6.2.  (Closes: #1033376)
+  * nvidia-alternative: Access kmod config files over a versioned
+    symlink (510.108.03-3).
+  * Add versioned Provides: nvidia-kernel-dkms-any (515.65.01-1).
+  * Bump Standards-Version to 4.6.2. No changes needed.
+
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 04 Apr 2023 15:16:26 +0200
+
 nvidia-graphics-drivers-legacy-390xx (390.157-1~deb11u1) bullseye; urgency=medium
 
   * Rebuild for bullseye.
@@ -3088,6 +3101,9 @@ nvidia-graphics-drivers (343.22-1) experimental; urgency=medium
  -- Andreas Beckmann <anbe@debian.org>  Mon, 20 Oct 2014 19:04:58 +0200
 
 nvidia-graphics-drivers (340.108-2) UNRELEASED; urgency=medium
+
+  * Support acpi_op_remove callback returning void to fix kernel module build
+    for Linux 6.2.
 
   * Update o_binary patch to fix kernel module build for Linux 6.1.
   * Backport acpi changes from 390.157, replacing earlier backports.
