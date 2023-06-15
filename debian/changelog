@@ -1,7 +1,7 @@
 nvidia-graphics-drivers-legacy-390xx (390.157-3) unstable; urgency=medium
 
   * Backport vm_area_struct_has_const_vm_flags changes from 525.105.17 to fix
-    kernel module build for Linux 6.3.
+    kernel module build for Linux 6.3.  (Closes: #1038014)
 
  -- Andreas Beckmann <anbe@debian.org>  Thu, 15 Jun 2023 10:01:34 +0200
 
