@@ -1,9 +1,9 @@
-nvidia-graphics-drivers-legacy-390xx (390.157-4) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.157-4) unstable; urgency=medium
 
   * Backport drm_driver_has_dumb_destroy changes from 525.116.03 to fix kernel
     module build for Linux 6.4.  (Closes: #1042892)
 
- -- Andreas Beckmann <anbe@debian.org>  Fri, 16 Jun 2023 17:29:02 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 02 Aug 2023 17:08:58 +0200
 
 nvidia-graphics-drivers-legacy-390xx (390.157-3) unstable; urgency=medium
 
