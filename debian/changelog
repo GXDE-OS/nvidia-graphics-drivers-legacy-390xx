@@ -1,7 +1,7 @@
-nvidia-graphics-drivers-legacy-390xx (390.157-7) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.157-7) unstable; urgency=medium
 
   * Backport drm_unlocked_ioctl_flag_present changes from 470.239.06 to fix
-    kernel module build for Linux 6.8.
+    kernel module build for Linux 6.8.  (Closes: #1071274)
   * Bump Standards-Version to 4.7.0. No changes needed.
 
  -- Andreas Beckmann <anbe@debian.org>  Mon, 20 May 2024 14:46:16 +0200
