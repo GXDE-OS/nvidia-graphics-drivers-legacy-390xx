@@ -1,3 +1,12 @@
+nvidia-graphics-drivers-legacy-390xx (390.157-8) UNRELEASED; urgency=medium
+
+  * Backport CONFIG_MITIGATION_RETPOLINE changes from 470.256.02.
+  * Backport follow_pfn changes from 550.90.07 to fix kernel module build for
+    Linux 6.10.
+  * bug-script: Report 'apt-cache policy' (535.183.06-1).
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 26 Jul 2024 22:29:09 +0200
+
 nvidia-graphics-drivers-legacy-390xx (390.157-7) unstable; urgency=medium
 
   * Backport drm_unlocked_ioctl_flag_present changes from 470.239.06 to fix
@@ -12,8 +21,8 @@ nvidia-graphics-drivers-legacy-390xx (390.157-6) unstable; urgency=medium
   * Backport drm_gem_prime_handle_to_fd changes from 470.223.02 to fix kernel
     module build for Linux 6.6.
   * Refuse to load module if IBT is enabled.  (Closes: #1052069)
-  * Switch suggestion from obsolete vulkan-utils to vulkan-tools.
-    (Closes: #1055503)
+  * Switch suggestion from obsolete vulkan-utils to vulkan-tools
+    (525.125.06-3).  (Closes: #1055503)
 
  -- Andreas Beckmann <anbe@debian.org>  Mon, 13 Nov 2023 10:01:19 +0100
 
