@@ -1,4 +1,4 @@
-nvidia-graphics-drivers-legacy-390xx (390.157-9) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.157-9) unstable; urgency=medium
 
   * Backport nv_get_kern_phys_address() changes from 555.42.02 to fix kernel
     module build with gcc-14 on arm*.
