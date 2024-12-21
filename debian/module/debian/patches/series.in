@@ -26,6 +26,19 @@ do-div-cast.patch
 0041-backport-CONFIG_MITIGATION_RETPOLINE-changes-from-47.patch
 0043-backport-follow_pfn-changes-from-550.90.07.patch
 0046-backport-nv_get_kern_phys_address-changes-from-555.4.patch
+0047-backport-drm_output_poll_changed-changes-from-535.21.patch
+0048-backport-cmd_symlink-changes-from-550.142.patch
+#HAS_UVM#0049-backport-uvm-warning-fixes-from-396.18.patch
+#HAS_UVM#0049-backport-uvm-warning-fixes-from-415.13.patch
+#HAS_UVM#0049-backport-uvm-warning-fixes-from-418.30.patch
+0049-backport-warning-fixes-from-430.09.patch
+#HAS_UVM#0049-backport-uvm-warning-fixes-from-435.17.patch
+#HAS_UVM#0049-backport-uvm-warning-fixes-from-510.39.01.patch
+#HAS_UVM#0050-backport-uvm-warning-fixes-from-535.146.02.patch
+0051-backport-warning-fixes-from-535.216.01.patch
+#HAS_UVM#0052-backport-uvm-warning-fixes-from-560.28.03.patch
+0053-fix-more-warnings.patch
+#HAS_UVM#0054-fix-more-uvm-warnings.patch
 
 # build system updates
 fragile-ARCH.patch
