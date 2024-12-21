@@ -1,4 +1,4 @@
-nvidia-graphics-drivers-legacy-390xx (390.157-10) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.157-10) unstable; urgency=medium
 
   * Backport drm_output_poll_changed changes from 535.216.01 to fix kernel
     module build for Linux 6.12.  (Closes: #1089522)
