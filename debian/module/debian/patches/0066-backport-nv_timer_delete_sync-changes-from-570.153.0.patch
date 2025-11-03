@@ -1,4 +1,4 @@
-From e66b5cf2f32e167ba3cba141e1938a7817fee1c9 Mon Sep 17 00:00:00 2001
+From 6f54aa8c491ea4db844c3ba0a188c4bec3811d7d Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Mon, 26 May 2025 09:58:49 +0200
 Subject: [PATCH] backport nv_timer_delete_sync changes from 570.153.02
@@ -85,13 +85,13 @@ index 2edbb82c..fb8d0634 100644
  
      return 0;
 diff --git a/nvidia/nvidia.Kbuild b/nvidia/nvidia.Kbuild
-index 58a2219c..fc680e71 100644
+index 810626ba..41a7ca4e 100644
 --- a/nvidia/nvidia.Kbuild
 +++ b/nvidia/nvidia.Kbuild
-@@ -168,6 +168,7 @@ NV_CONFTEST_FUNCTION_COMPILE_TESTS += acpi_video_backlight_use_native
- NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_gpl_of_node_to_nid
+@@ -169,6 +169,7 @@ NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_gpl_of_node_to_nid
  NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_present_swiotlb_map_sg_attrs
  NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_present_swiotlb_dma_ops
+ NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_gpl_screen_info
 +NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_present_timer_delete_sync
  
  NV_CONFTEST_TYPE_COMPILE_TESTS += i2c_adapter
