@@ -1,4 +1,4 @@
-nvidia-graphics-drivers-legacy-390xx (390.157-14) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-legacy-390xx (390.157-14) unstable; urgency=medium
 
   [ Andreas Beckmann ]
   * Backport drm_fb_create_takes_format_info changes from 535.274.02 to fix
