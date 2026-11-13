@@ -1,3 +1,17 @@
+nvidia-graphics-drivers-legacy-390xx (390.157-16) UNRELEASED; urgency=medium
+
+  * libnvidia-ml1 (amd64): install a small NVML compatibility shim as
+    libnvidia-ml.so.1 so that GPU/memory utilization and clocks can be
+    queried on Fermi and non-Titan GeForce devices, where the vendor NVML
+    library returns NVML_ERROR_NOT_SUPPORTED even though the kernel driver
+    has the data.  Every other NVML symbol is still resolved by the
+    unmodified vendor library through DT_NEEDED.  The workaround only acts
+    after a NOT_SUPPORTED result and can be disabled with
+    NVML_LEGACY_TELEMETRY=0.  Other architectures are unchanged.
+  * Document the telemetry limitation in nvidia-driver.README.Debian.
+
+ -- gfdgd_xi <3025613752@qq.com>  Fri, 13 Nov 2026 18:00:00 +0800
+
 nvidia-graphics-drivers-legacy-390xx (390.157-15) unstable; urgency=medium
 
   * Backport drm_print.h changes from 570.211.01, for_each_*_*_in_state and

@@ -12,6 +12,30 @@ For any news on this package check
 https://bugs.debian.org/#NVIDIA#-driver
 
 
+GPU UTILIZATION ON FERMI / GEFORCE DEVICES:
+-----------------------------------------------------------------------
+
+The NVML library shipped with the 390xx legacy driver deliberately gates out
+most telemetry queries for pre-Kepler and non-Titan GeForce products.  On such
+devices "nvidia-smi --query-gpu=utilization.gpu" reports "[Not Supported]" and
+clocks show up as "N/A", even though the kernel driver does have the data.
+This is an upstream NVML policy, not a kernel module or packaging problem.
+
+On amd64, libnvidia-ml1 installs a small compatibility shim as
+libnvidia-ml.so.1.  It has a DT_NEEDED dependency on the unmodified vendor
+library (resolved via $ORIGIN), so all NVML symbols except the two intercepted
+ones are provided by the vendor DSO unchanged.  When NVML rejects a query with
+NVML_ERROR_NOT_SUPPORTED, the shim clears the device's telemetry capability
+gate and retries the query once.  Devices that already support these queries
+are never touched.
+
+The shim is specific to the 390.157 amd64 NVML binary and is not built on
+other architectures.  It can be disabled at runtime by exporting
+NVML_LEGACY_TELEMETRY=0.  Per-process GPU accounting, power and fan sensors,
+and "nvidia-smi dmon/pmon/stats" remain unavailable on these GPUs because the
+driver and hardware do not expose the required counters.
+
+
 NOTES ABOUT GLVND VS. NON-GLVND FLAVOURS:
 -----------------------------------------------------------------------
 

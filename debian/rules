@@ -258,9 +258,40 @@ endif
 
 override_dh_auto_build: build-stamp
 
+# The NVML telemetry shim relies on a private ABI offset of the 390xx amd64
+# NVML binary.  Keep it restricted to the architecture we validated.
+TELEMETRY_ARCH_LIST	 = amd64
+has_telemetry		 = $(filter $(DEB_HOST_ARCH),$(TELEMETRY_ARCH_LIST))
+
 override_dh_auto_install:
 	$(RM) -r debian/tmp
 	cp -al build/ debian/tmp
+ifneq (,$(has_telemetry))
+	# Build libnvidia-ml.so.1 as a thin shim around the unmodified vendor
+	# library.  The link stub exists only to record a DT_NEEDED entry for
+	# libnvidia-ml.so.$(version); at runtime the real library from the same
+	# directory is found through the ORIGIN-based runpath.
+	printf 'void __nvml_link_stub(void){}\n' > debian/tmp/nvml-link-stub.c
+	$(CC) -shared -fPIC -nostdlib \
+		-Wl,-soname,libnvidia-ml.so.$(version) \
+		-o debian/tmp/libnvml-link-stub.so.$(version) \
+		debian/tmp/nvml-link-stub.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -shared -fPIC \
+		-Wl,-soname,libnvidia-ml.so.1 -Wl,-s \
+		-Wl,--no-as-needed -Ldebian/tmp \
+		-l:libnvml-link-stub.so.$(version) -Wl,--as-needed \
+		-Wl,-rpath,'$$ORIGIN' -Wl,-rpath,'$$ORIGIN/nvidia/$(current)' \
+		-o debian/tmp/libnvidia-ml.so.1 \
+		debian/nvml-legacy-telemetry.c -ldl
+	$(RM) debian/tmp/nvml-link-stub.c \
+		debian/tmp/libnvml-link-stub.so.$(version)
+endif
+
+# The shim only exports the two functions it intercepts; all other NVML
+# symbols are provided by the vendor DSO.  Do not compare it against the
+# symbol file generated for the vendor library.
+override_dh_makeshlibs:
+	dh_makeshlibs $(if $(has_telemetry),-Xlibnvidia-ml.so.1)
 
 module_source_pkg	 = debian/$(nvidia-kernel)-source
 module_source_txz	 = $(module_source_pkg)/usr/src/$(nvidia-kernel).tar.xz
@@ -380,6 +411,8 @@ override_dh_strip_nondeterminism:
 	-e 's{#ARCH_LIST#}{$(DRIVER_ARCH_LIST)}g;' \
 	-e 's{#AUTOPKGTEST_ARCH_LIST#}{$(AUTOPKGTEST_ARCH_LIST)}g;' \
 	-e 's{#HAS_UVM#}{$(if $(has_uvm),,#)}g;' \
+	-e 's{#SHIM#}{$(if $(has_telemetry),,#)}g;' \
+	-e 's{#NOSHIM#}{$(if $(has_telemetry),#,)}g;' \
 	-e 's{#!armhf#}{$(if $(filter armhf,$(DEB_HOST_ARCH)),#)}g;' \
 	-e 's{#tls#}{$(if $(filter armhf,$(DEB_HOST_ARCH)),,tls/)}g;' \
 	$(EXTRA_SUBSTITUTIONS) \
