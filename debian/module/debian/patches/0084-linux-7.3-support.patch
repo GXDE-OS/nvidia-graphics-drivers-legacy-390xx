@@ -1,8 +1,9 @@
 Description: Add support for building against Linux 7.3 kernels
  The following kernel interface changes are handled:
-  - the legacy ACPI bus driver interface (struct acpi_driver and
-    acpi_bus_register_driver()) is gone; fall back to the no-op ACPI
-    implementation when it is unavailable;
+  - the legacy ACPI bus driver registration (struct acpi_driver and
+    acpi_bus_register_driver()) is gone; only the ACPI video driver
+    registration is skipped, the ACPI methods used by the RM stay
+    enabled (they are required to initialize Optimus GPUs);
   - strncpy() was removed, use equivalent bounded copies instead;
   - the global screen_info variable is gone, report no framebuffer;
   - the per-VMA lock was reworked (VM_REFCNT_EXCLUDE_READERS_FLAG),
@@ -121,23 +122,6 @@ Description: Add support for building against Linux 7.3 kernels
          drm_driver_has_dumb_destroy)
              #
              # Determine if the 'drm_driver' structure has a 'dumb_destroy'
---- a/common/inc/nv-linux.h
-+++ b/common/inc/nv-linux.h
-@@ -333,7 +333,13 @@
- 
- #if defined(CONFIG_ACPI)
- #include <linux/acpi.h>
--#if defined(NV_ACPI_DEVICE_OPS_HAS_MATCH) || defined(ACPI_VIDEO_HID)
-+/*
-+ * Registering the RM ACPI video driver requires the legacy ACPI bus
-+ * driver interface. Kernels without it fall back to the no-op
-+ * implementation in nv-acpi.c.
-+ */
-+#if defined(NV_ACPI_BUS_REGISTER_DRIVER_PRESENT) && \
-+    (defined(NV_ACPI_DEVICE_OPS_HAS_MATCH) || defined(ACPI_VIDEO_HID))
- #define NV_LINUX_ACPI_EVENTS_SUPPORTED 1
- #endif
- #endif
 --- a/nvidia/nvidia.Kbuild
 +++ b/nvidia/nvidia.Kbuild
 @@ -125,6 +125,7 @@
@@ -157,6 +141,71 @@ Description: Add support for building against Linux 7.3 kernels
  
  NV_CONFTEST_GENERIC_COMPILE_TESTS += dom0_kernel_present
  NV_CONFTEST_GENERIC_COMPILE_TESTS += nvidia_vgpu_kvm_build
+--- a/nvidia/nv-acpi.c
++++ b/nvidia/nv-acpi.c
+@@ -56,13 +56,22 @@
+ };
+ #endif
+ 
++/*
++ * The ACPI bus driver registration interface (struct acpi_driver and
++ * acpi_bus_register_driver()) is no longer available on newer kernels.
++ * Only the registration of the ACPI video driver has to be skipped;
++ * the ACPI methods used by the RM must remain available.
++ */
++#if defined(NV_ACPI_BUS_REGISTER_DRIVER_PRESENT)
+ static struct acpi_driver *nv_acpi_driver;
++#endif
+ static acpi_handle nvif_handle = NULL;
+ static acpi_handle nvif_parent_gpu_handle  = NULL;
+ static acpi_handle wmmx_handle = NULL;
+ static acpi_handle mxmi_handle = NULL;
+ static acpi_handle mxms_handle = NULL;
+ 
++#if defined(NV_ACPI_BUS_REGISTER_DRIVER_PRESENT)
+ static const struct acpi_driver nv_acpi_driver_template = {
+     .name = "NVIDIA ACPI Video Driver",
+     .class = "video",
+@@ -81,6 +90,7 @@
+ #endif
+     },
+ };
++#endif
+ 
+ static int nv_acpi_get_device_handle(nv_state_t *nv, acpi_handle *dev_handle)
+ {
+@@ -151,6 +161,7 @@
+     if ((rmStatus == NV_OK) && (acpi_event_config == 0))
+         return 0;
+ 
++#if defined(NV_ACPI_BUS_REGISTER_DRIVER_PRESENT)
+     if (nv_acpi_driver != NULL)
+         return -EBUSY;
+ 
+@@ -170,6 +181,7 @@
+         os_free_mem(nv_acpi_driver);
+         nv_acpi_driver = NULL;
+     }
++#endif
+ 
+ #if defined(NV_REGISTER_ACPI_NOTIFER_PRESENT)
+     register_acpi_notifier(&acpi_nb);
+@@ -202,6 +214,7 @@
+     if ((rmStatus == NV_OK) && (acpi_event_config == 0))
+         return 0;
+ 
++#if defined(NV_ACPI_BUS_REGISTER_DRIVER_PRESENT)
+     if (nv_acpi_driver == NULL)
+         return -ENXIO;
+ 
+@@ -209,6 +222,7 @@
+     os_free_mem(nv_acpi_driver);
+ 
+     nv_acpi_driver = NULL;
++#endif
+ 
+     return 0;
+ }
 --- a/nvidia/nv-gpu-numa.c
 +++ b/nvidia/nv-gpu-numa.c
 @@ -158,7 +158,7 @@
