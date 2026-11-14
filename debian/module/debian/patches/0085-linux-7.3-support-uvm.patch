@@ -1,0 +1,18 @@
+Description: Add support for building UVM against Linux 7.3 kernels
+ strncpy() was removed from the kernel, use snprintf() instead.
+ This part is kept separate because the UVM sources are not shipped in
+ every driver package.
+
+--- a/nvidia-uvm/uvm8_pmm_gpu.c
++++ b/nvidia-uvm/uvm8_pmm_gpu.c
+@@ -2794,7 +2794,9 @@
+             size_t size;
+             size_t align;
+             if (level == 0) {
+-                strncpy(chunk_split_cache[level].name, "uvm_gpu_chunk_t", sizeof(chunk_split_cache[level].name) - 1);
++                snprintf(chunk_split_cache[level].name,
++                         sizeof(chunk_split_cache[level].name),
++                         "%s", "uvm_gpu_chunk_t");
+                 size = sizeof(uvm_gpu_chunk_t);
+                 align = __alignof__(uvm_gpu_chunk_t);
+             } else {

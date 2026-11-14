@@ -77,3 +77,7 @@ ignore_xen_on_arm.patch
 arm-outer-sync.patch
 nvidia-drm-arm-cflags.patch
 armhf-on-arm64-kernel.patch
+
+# Linux 7.3 kernel support (must be applied last)
+0084-linux-7.3-support.patch
+#HAS_UVM#0085-linux-7.3-support-uvm.patch

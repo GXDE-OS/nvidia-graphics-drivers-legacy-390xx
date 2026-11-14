@@ -1,0 +1,320 @@
+Description: Add support for building against Linux 7.3 kernels
+ The following kernel interface changes are handled:
+  - the legacy ACPI bus driver interface (struct acpi_driver and
+    acpi_bus_register_driver()) is gone; fall back to the no-op ACPI
+    implementation when it is unavailable;
+  - strncpy() was removed, use equivalent bounded copies instead;
+  - the global screen_info variable is gone, report no framebuffer;
+  - the per-VMA lock was reworked (VM_REFCNT_EXCLUDE_READERS_FLAG),
+    implement vma_start_write() without depending on GPL-only symbols;
+  - DRM renamed struct drm_atomic_state to struct drm_atomic_commit and
+    changed the plane/crtc atomic_check and swap_state callbacks;
+  - dma_fence_signal() now returns void.
+ All changes are guarded by conftests so that older kernels keep using
+ the existing code paths.
+
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -1176,6 +1176,36 @@
+             fi
+         ;;
+ 
++        acpi_bus_register_driver)
++            #
++            # Determine if the legacy ACPI bus driver interface, i.e. the
++            # definition of struct acpi_driver and the
++            # acpi_bus_register_driver()/acpi_bus_unregister_driver()
++            # functions, is still available to modules.
++            #
++            # Once ACPI bus driver registration became private to the ACPI
++            # subsystem, struct acpi_driver was removed from the public
++            # headers and the RM ACPI video driver can no longer be
++            # registered.
++            #
++            echo "$CONFTEST_PREAMBLE
++            #include <linux/acpi.h>
++            int conftest_acpi_bus_register_driver(void) {
++                struct acpi_driver driver;
++                return acpi_bus_register_driver(&driver) + sizeof(driver);
++            }" > conftest$$.c
++
++            $CC $CFLAGS -c conftest$$.c > /dev/null 2>&1
++            rm -f conftest$$.c
++
++            if [ -f conftest$$.o ]; then
++                rm -f conftest$$.o
++                echo "#define NV_ACPI_BUS_REGISTER_DRIVER_PRESENT" | append_conftest "functions"
++            else
++                echo "#undef NV_ACPI_BUS_REGISTER_DRIVER_PRESENT" | append_conftest "functions"
++            fi
++        ;;
++
+         acpi_walk_namespace)
+             #
+             # Determine if the acpi_walk_namespace() function is present
+@@ -4963,6 +4993,68 @@
+             compile_check_conftest "$CODE" "NV_VMA_FLAGS_SET_WORD_PRESENT" "" "functions"
+         ;;
+ 
++        vma_start_write_new_api)
++            #
++            # Determine if the per-VMA write lock can be taken using the
++            # single-argument __is_vma_write_locked() and
++            # __vma_raw_mm_seqnum() helpers.
++            #
++            # The VMA refcount based locking was reworked: VMA_LOCK_OFFSET
++            # was replaced by VM_REFCNT_EXCLUDE_READERS_FLAG and
++            # __is_vma_write_locked() no longer returns the mmap lock
++            # sequence through an additional argument.
++            #
++            CODE="
++            #include <linux/stddef.h>
++            #include <linux/mm.h>
++            #include <linux/mmap_lock.h>
++            unsigned int conftest_vma_start_write_new_api(struct vm_area_struct *vma) {
++                if (__is_vma_write_locked(vma))
++                    return 0;
++                return __vma_raw_mm_seqnum(vma) +
++                       offsetof(struct vm_area_struct, vm_lock_seq);
++            }"
++
++            compile_check_conftest "$CODE" "NV_VMA_START_WRITE_NEW_API_PRESENT" "" "types"
++        ;;
++
++        screen_info_present)
++            #
++            # Determine whether the global 'screen_info' variable is still
++            # available. It was removed once the framebuffer setup was
++            # moved behind the sysfb helpers, leaving only the struct
++            # definition and accessor functions in the public headers.
++            #
++            CODE="
++            #if defined(NV_LINUX_SCREEN_INFO_H_PRESENT)
++            #include <linux/screen_info.h>
++            #else
++            #include <linux/tty.h>
++            #endif
++            unsigned long conftest_screen_info_present(void) {
++                return (unsigned long)&screen_info;
++            }"
++
++            compile_check_conftest "$CODE" "NV_SCREEN_INFO_PRESENT" "" "types"
++        ;;
++
++        drm_atomic_commit)
++            #
++            # Determine if 'struct drm_atomic_state' was renamed to
++            # 'struct drm_atomic_commit'. In that case all of the state
++            # helpers were renamed as well and the mode_config callbacks
++            # take the new type.
++            #
++            CODE="
++            #include <linux/stddef.h>
++            #include <drm/drm_atomic.h>
++            int conftest_drm_atomic_commit(void) {
++                return offsetof(struct drm_atomic_commit, acquire_ctx);
++            }"
++
++            compile_check_conftest "$CODE" "NV_DRM_ATOMIC_COMMIT_PRESENT" "" "types"
++        ;;
++
+         drm_driver_has_dumb_destroy)
+             #
+             # Determine if the 'drm_driver' structure has a 'dumb_destroy'
+--- a/common/inc/nv-linux.h
++++ b/common/inc/nv-linux.h
+@@ -333,7 +333,13 @@
+ 
+ #if defined(CONFIG_ACPI)
+ #include <linux/acpi.h>
+-#if defined(NV_ACPI_DEVICE_OPS_HAS_MATCH) || defined(ACPI_VIDEO_HID)
++/*
++ * Registering the RM ACPI video driver requires the legacy ACPI bus
++ * driver interface. Kernels without it fall back to the no-op
++ * implementation in nv-acpi.c.
++ */
++#if defined(NV_ACPI_BUS_REGISTER_DRIVER_PRESENT) && \
++    (defined(NV_ACPI_DEVICE_OPS_HAS_MATCH) || defined(ACPI_VIDEO_HID))
+ #define NV_LINUX_ACPI_EVENTS_SUPPORTED 1
+ #endif
+ #endif
+--- a/nvidia/nvidia.Kbuild
++++ b/nvidia/nvidia.Kbuild
+@@ -125,6 +125,7 @@
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += ioremap_cache
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += ioremap_wc
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += acpi_walk_namespace
++NV_CONFTEST_FUNCTION_COMPILE_TESTS += acpi_bus_register_driver
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += pci_domain_nr
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += dma_mapping_error
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += sg_alloc_table
+@@ -215,6 +216,8 @@
+ NV_CONFTEST_TYPE_COMPILE_TESTS += vmalloc_has_pgprot_t_arg
+ NV_CONFTEST_TYPE_COMPILE_TESTS += pci_dev_has_skip_bus_pm
+ NV_CONFTEST_TYPE_COMPILE_TESTS += pci_channel_state
++NV_CONFTEST_TYPE_COMPILE_TESTS += vma_start_write_new_api
++NV_CONFTEST_TYPE_COMPILE_TESTS += screen_info_present
+ 
+ NV_CONFTEST_GENERIC_COMPILE_TESTS += dom0_kernel_present
+ NV_CONFTEST_GENERIC_COMPILE_TESTS += nvidia_vgpu_kvm_build
+--- a/nvidia/nv-gpu-numa.c
++++ b/nvidia/nv-gpu-numa.c
+@@ -158,7 +158,7 @@
+     if (name_len + 1 > BUF_SIZE)
+         return -ERANGE;
+ 
+-    strncpy(name_copy, name, name_len);
++    memcpy(name_copy, name, name_len);
+     *(name_copy + name_len) = '\0';
+ 
+     // Convert the memory block ID into an integer
+--- a/nvidia/os-interface.c
++++ b/nvidia/os-interface.c
+@@ -639,9 +639,12 @@
+ 
+ void NV_API_CALL os_get_current_process_name(char *buf, NvU32 len)
+ {
++    size_t name_len;
++
+     task_lock(current);
+-    strncpy(buf, current->comm, len - 1);
+-    buf[len - 1] = '\0';
++    name_len = strnlen(current->comm, len - 1);
++    memcpy(buf, current->comm, name_len);
++    buf[name_len] = '\0';
+     task_unlock(current);
+ }
+ 
+@@ -1123,7 +1126,7 @@
+     NvU16 *pFbPitch
+ )
+ {
+-#if (defined(NVCPU_X86) || defined(NVCPU_X86_64))
++#if (defined(NVCPU_X86) || defined(NVCPU_X86_64)) && defined(NV_SCREEN_INFO_PRESENT)
+     //
+     // If there is not a framebuffer console, return 0 size.
+     //
+--- a/nvidia/nv-mmap.c
++++ b/nvidia/nv-mmap.c
+@@ -582,6 +582,7 @@
+ }
+ 
+ #if !NV_CAN_CALL_VMA_START_WRITE
++#if !defined(NV_VMA_START_WRITE_NEW_API_PRESENT)
+ static NvBool nv_vma_enter_locked(struct vm_area_struct *vma, NvBool detaching)
+ {
+     NvU32 tgt_refcnt = VMA_LOCK_OFFSET;
+@@ -651,4 +652,27 @@
+     }
+ }
+ EXPORT_SYMBOL(nv_vma_start_write);
++#else // NV_VMA_START_WRITE_NEW_API_PRESENT
++
++/*
++ * The per-VMA lock implementation was reworked: VMA_LOCK_OFFSET was
++ * replaced by VM_REFCNT_EXCLUDE_READERS_FLAG and __is_vma_write_locked()
++ * takes a single argument. __vma_start_write() cannot be called here
++ * because it is exported as GPL-only.
++ *
++ * nv_vm_flags_set()/nv_vm_flags_clear() are only used from mmap()
++ * callbacks, where the VMA has just been created and cannot have any
++ * readers yet. Marking the VMA as write-locked by storing the current
++ * mmap lock sequence is therefore sufficient; mmap_write_unlock() calls
++ * vma_end_write_all(), which invalidates the sequence again.
++ */
++void nv_vma_start_write(struct vm_area_struct *vma)
++{
++    if (__is_vma_write_locked(vma))
++        return;
++
++    WRITE_ONCE(vma->vm_lock_seq, __vma_raw_mm_seqnum(vma));
++}
++EXPORT_SYMBOL(nv_vma_start_write);
++#endif // NV_VMA_START_WRITE_NEW_API_PRESENT
+ #endif // !NV_CAN_CALL_VMA_START_WRITE
+--- a/nvidia-modeset/nvidia-modeset-linux.c
++++ b/nvidia-modeset/nvidia-modeset-linux.c
+@@ -185,7 +185,14 @@
+ 
+ char* NVKMS_API_CALL nvkms_strncpy(char *dest, const char *src, size_t n)
+ {
+-    return strncpy(dest, src, n);
++    size_t i;
++
++    for (i = 0; i < n && src[i] != '\0'; i++)
++        dest[i] = src[i];
++    for (; i < n; i++)
++        dest[i] = '\0';
++
++    return dest;
+ }
+ 
+ void NVKMS_API_CALL nvkms_usleep(NvU64 usec)
+--- a/nvidia-drm/nvidia-drm.Kbuild
++++ b/nvidia-drm/nvidia-drm.Kbuild
+@@ -53,6 +53,7 @@
+ NV_CONFTEST_GENERIC_COMPILE_TESTS += is_export_symbol_gpl_refcount_dec_and_test
+ NV_CONFTEST_GENERIC_COMPILE_TESTS += is_export_symbol_present_drm_gem_prime_handle_to_fd
+ NV_CONFTEST_GENERIC_COMPILE_TESTS += is_export_symbol_gpl___vma_start_write
++NV_CONFTEST_TYPE_COMPILE_TESTS += drm_atomic_commit
+ 
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += drm_dev_unref
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += drm_reinit_primary_mode_group
+--- a/nvidia-drm/nvidia-drm-conftest.h
++++ b/nvidia-drm/nvidia-drm-conftest.h
+@@ -54,6 +54,38 @@
+ 
+ #endif
+ 
++#if defined(NV_DRM_ATOMIC_COMMIT_PRESENT)
++/*
++ * struct drm_atomic_state was renamed to struct drm_atomic_commit and
++ * the state helpers were renamed accordingly. Map the names used by
++ * this driver to the new API. This has to be done before including any
++ * DRM headers, which is where this header is included.
++ */
++#define drm_atomic_state drm_atomic_commit
++#define drm_atomic_state_alloc drm_atomic_commit_alloc
++#define drm_atomic_state_init drm_atomic_commit_init
++#define drm_atomic_state_default_clear drm_atomic_commit_default_clear
++#define drm_atomic_state_default_release drm_atomic_commit_default_release
++#define drm_atomic_state_get drm_atomic_commit_get
++#define drm_atomic_state_put drm_atomic_commit_put
++#define drm_atomic_state_free drm_atomic_commit_put
++
++/*
++ * The plane and CRTC atomic_check callbacks now receive the whole
++ * commit instead of the object state. The driver already has a code
++ * path for that, selected by these conftests.
++ */
++#define NV_DRM_PLANE_ATOMIC_CHECK_HAS_ATOMIC_STATE_ARG
++#define NV_DRM_CRTC_ATOMIC_CHECK_HAS_ATOMIC_STATE_ARG
++
++/*
++ * drm_atomic_helper_swap_state() takes the commit and a 'stall'
++ * argument and returns an error code.
++ */
++#define NV_DRM_ATOMIC_HELPER_SWAP_STATE_HAS_STALL_ARG
++#define NV_DRM_ATOMIC_HELPER_SWAP_STATE_RETURN_INT
++#endif
++
+ #if defined(NV_DRM_DRIVER_HAS_GEM_PRIME_RES_OBJ) || \
+     defined(NV_DRM_GEM_OBJECT_HAS_RESV)
+ #define NV_DRM_FENCE_AVAILABLE
+--- a/nvidia-drm/nvidia-dma-fence-helper.h
++++ b/nvidia-drm/nvidia-dma-fence-helper.h
+@@ -89,11 +89,11 @@
+ #endif
+ }
+ 
+-static inline int nv_dma_fence_signal(nv_dma_fence_t *fence) {
++static inline void nv_dma_fence_signal(nv_dma_fence_t *fence) {
+ #if defined(NV_LINUX_FENCE_H_PRESENT)
+-    return fence_signal(fence);
++    (void)fence_signal(fence);
+ #else
+-    return dma_fence_signal(fence);
++    (void)dma_fence_signal(fence);
+ #endif
+ }
+ 
